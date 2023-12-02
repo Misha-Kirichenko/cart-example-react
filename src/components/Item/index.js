@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import CartContext from '../../contexts/cartContext';
-import './item.css'
+import { Link } from 'react-router-dom';
 
 const Item = ({ itemData, quantityState }) => {
   const { quantities, setQuantities } = quantityState;
@@ -30,9 +30,12 @@ const Item = ({ itemData, quantityState }) => {
   }
 
   return (<div className="item">
-    <div className="item-image"><img src={itemData.imgUrl} className="resp-img" alt={itemData.name} /></div>
+    <div className="item-image">
+      <Link to={`/products/${itemData.id}`}>
+        <img src={itemData.imgUrl} className="resp-img" alt={itemData.name} />
+      </Link>
+    </div>
     <p><b>Name:</b>{itemData.name}</p>
-    <div><b>Description:</b><p>{itemData.description}</p></div>
     <p><b>Price:</b>{itemData.price}$</p>
     <p><input onChange={handleSetQuantity} type="number" className="item-price" min={1} value={quantities[itemData.id]} /></p>
     <p><button onClick={handleAddToCart}>Add to cart</button></p>

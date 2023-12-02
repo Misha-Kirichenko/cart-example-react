@@ -34,7 +34,7 @@ const CartPage = () => {
     </thead>
     <tbody>
       {
-        addedProducts.data.map(product => <CartRow product={product} />)
+        addedProducts.data.map(product => <CartRow product={product} key={product.id} />)
       }
     </tbody>
   </table>;
