@@ -3,19 +3,32 @@ import MainPage from '../MainPage';
 import CartPage from '../CartPage';
 import './app.css';
 import Product from "../Product";
+import CartContext from '../../contexts/cartContext';
+import { useState } from "react";
 
 const App = () => {
+
+  const defaultCartState = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : {};
+  const [cartItems, setCartItems] = useState(defaultCartState);
+
   return <Router>
     <Routes>
       <Route
         path="/"
         exact
-        element={<MainPage />}
+        element={
+          <CartContext.Provider value={{ cartItems, setCartItems }}>
+            <MainPage />
+          </CartContext.Provider>
+        }
       />
       <Route
         path="/cart"
         exact
-        element={<CartPage />
+        element={
+          <CartContext.Provider value={{ cartItems, setCartItems }}>
+            <CartPage />
+          </CartContext.Provider>
         }
       />
       <Route
